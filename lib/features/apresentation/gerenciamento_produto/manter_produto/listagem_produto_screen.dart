@@ -9,7 +9,10 @@ class ListagemProdutoScreen extends StatefulWidget {
 class _ListagemProdutoScreenState extends State<ListagemProdutoScreen> {
   final ScrollController _scrollController = ScrollController();
   final ScrollController _listaProdutosScrollController = ScrollController();
-
+  final TextEditingController fabricanteProdutoController =
+      TextEditingController();
+  final TextEditingController descricaoProdutoController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -61,10 +64,14 @@ class _ListagemProdutoScreenState extends State<ListagemProdutoScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 180,
+                          height: 80,
                         ),
                         Expanded(
                           child: ProdutosListView(
+                            descricaoProdutoController:
+                                descricaoProdutoController,
+                            fabricanteProdutoController:
+                                fabricanteProdutoController,
                             scrollController: _listaProdutosScrollController,
                           ),
                         ),

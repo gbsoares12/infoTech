@@ -22,6 +22,26 @@ class ProdutoRepository {
     }
   }
 
+  Future<bool> deletarProduto(
+      DocumentReference produtoDocumentReference) async {
+    try {
+      await produtoDocumentReference.delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> editarProduto(Map<String, dynamic> mapProdutoEditado,
+      DocumentReference produtoDocumentReferente) async {
+    try {
+      await produtoDocumentReferente.updateData(mapProdutoEditado);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Stream<QuerySnapshot> getStreamProdutos() {
     return _firestore.collection("produtos").orderBy("descricao").snapshots();
   }
