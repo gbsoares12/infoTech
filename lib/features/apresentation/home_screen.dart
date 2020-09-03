@@ -84,10 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
             controller: _scrollController,
             physics: NeverScrollableScrollPhysics(),
             children: [
-              ListagemProdutoScreen(),
-              CadastroProduto(),
-              CadastroCliente(),
               Container(),
+              CadastroProduto(),
+              ListagemProdutoScreen(),
+              CadastroCliente(),
             ],
           )),
     );
