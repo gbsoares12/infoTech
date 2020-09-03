@@ -19,7 +19,7 @@ class ProdutoModel extends Produto {
       id: snapshot.documentID,
       descricao: snapshot.data["descricao"],
       fabricante: snapshot.data["fabricante"],
-      documentReference: snapshot.data["documentReference"],
+      documentReference: snapshot.reference,
     );
   }
 }
