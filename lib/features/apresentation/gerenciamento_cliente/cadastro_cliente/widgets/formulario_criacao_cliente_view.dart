@@ -9,6 +9,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
   final TextEditingController cidadeClienteController;
   final TextEditingController cepClienteController;
   final TextEditingController estadoClienteController;
+  final bool readOnly;
 
   const FormularioCriacaoCliente({
     Key key,
@@ -20,6 +21,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
     @required this.cidadeClienteController,
     @required this.cepClienteController,
     @required this.estadoClienteController,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.15,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: nomeClienteController,
                     decoration: InputDecoration(
                       labelText: "Nome",
@@ -49,6 +52,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.1,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: cpfClienteController,
                     decoration: InputDecoration(
                       labelText: "CPF",
@@ -67,6 +71,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.15,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: logradouroClienteController,
                     decoration: InputDecoration(
                       labelText: "Logradouro",
@@ -76,6 +81,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.1,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: numeroClienteController,
                     decoration: InputDecoration(
                       labelText: "Número",
@@ -94,6 +100,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.15,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: cidadeClienteController,
                     decoration: InputDecoration(
                       labelText: "Cidade",
@@ -103,6 +110,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.1,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: bairroClienteController,
                     decoration: InputDecoration(
                       labelText: "Bairro",
@@ -121,6 +129,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.15,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: cepClienteController,
                     decoration: InputDecoration(
                       labelText: "Cep",
@@ -130,6 +139,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
                 Container(
                   width: screenSize.width * 0.1,
                   child: TextFormField(
+                    readOnly: readOnly,
                     controller: estadoClienteController,
                     decoration: InputDecoration(
                       labelText: "Estado",

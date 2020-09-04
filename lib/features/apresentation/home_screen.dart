@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_cliente/cadastro_cliente/cadastro_cliente._screen.dart';
+import 'package:infoTech/features/apresentation/gerenciamento_cliente/manter_cliente/listagem_cliente_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_produto/cadastro_produto/cadastro_produto_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_produto/manter_produto/listagem_produto_screen.dart';
 
@@ -72,7 +73,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () {
                         _scrollController.jumpToPage(3);
                       },
-                    )
+                    ),
+                    ListTile(
+                      title: Text("Listagem dos clientes"),
+                      trailing: Icon(Icons.format_list_numbered),
+                      onTap: () {
+                        _scrollController.jumpToPage(4);
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -86,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CadastroProduto(),
               ListagemProdutoScreen(),
               CadastroCliente(),
+              ListagemClienteScreen(),
             ],
           )),
     );
