@@ -9,6 +9,7 @@ class Pedido {
   final Cliente cliente;
   final List<dynamic> listaProdutosDocumentReferente;
   final List<Produto> listaProdutos;
+  final double valorTotal;
   final dynamic documentReference;
 
   Pedido(
@@ -17,5 +18,6 @@ class Pedido {
       @required this.cliente,
       @required this.listaProdutosDocumentReferente,
       @required this.listaProdutos,
+      @required this.valorTotal,
       @required this.documentReference});
 }
