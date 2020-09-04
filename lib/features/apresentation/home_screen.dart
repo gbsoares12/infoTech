@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_cliente/cadastro_cliente/cadastro_cliente._screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_cliente/manter_cliente/listagem_cliente_screen.dart';
+import 'package:infoTech/features/apresentation/gerenciamento_pedido/cadastro_pedido/cadastro_pedido_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_produto/cadastro_produto/cadastro_produto_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_produto/manter_produto/listagem_produto_screen.dart';
 
@@ -83,6 +84,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+                ExpansionTile(
+                  title: Text("Gerênciamento de pedidos"),
+                  children: [
+                    ListTile(
+                      title: Text("Cadastar pedido"),
+                      trailing: Icon(Icons.person_add),
+                      onTap: () {
+                        _scrollController.jumpToPage(5);
+                      },
+                    ),
+                    ListTile(
+                      title: Text("Listagem dos pedidos"),
+                      trailing: Icon(Icons.format_list_numbered),
+                      onTap: () {
+                        _scrollController.jumpToPage(6);
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -95,6 +115,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ListagemProdutoScreen(),
               CadastroCliente(),
               ListagemClienteScreen(),
+              CadastroPedido(),
+              Container(
+                color: Colors.red,
+              ),
             ],
           )),
     );
