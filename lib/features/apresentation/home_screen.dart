@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     ListTile(
                       title: Text("Cadastar pedido"),
-                      trailing: Icon(Icons.person_add),
+                      trailing: Icon(Icons.add),
                       onTap: () {
                         _scrollController.jumpToPage(5);
                       },

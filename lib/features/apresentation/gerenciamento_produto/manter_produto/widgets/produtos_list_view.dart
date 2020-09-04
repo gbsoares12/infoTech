@@ -10,12 +10,13 @@ class ProdutosListView extends StatelessWidget {
   final ScrollController scrollController;
   final TextEditingController fabricanteProdutoController;
   final TextEditingController descricaoProdutoController;
-
+  final bool isCriacaoPedido;
   ProdutosListView(
       {Key key,
       @required this.scrollController,
       @required this.descricaoProdutoController,
-      @required this.fabricanteProdutoController})
+      @required this.fabricanteProdutoController,
+      this.isCriacaoPedido = false})
       : super(key: key);
 
   @override
@@ -59,37 +60,39 @@ class ProdutosListView extends StatelessWidget {
                                 .data.documents[index].data["descricao"]),
                             subtitle: Text(snapshot
                                 .data.documents[index].data["fabricante"]),
-                            trailing: Container(
-                              width: 100,
-                              height: 50,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () async {
-                                        var response = pr.deletarProduto(
-                                            snapshot.data.documents[index]
-                                                .reference);
+                            trailing: this.isCriacaoPedido
+                                ? Container()
+                                : Container(
+                                    width: 100,
+                                    height: 50,
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                            icon: Icon(Icons.delete),
+                                            onPressed: () async {
+                                              var response = pr.deletarProduto(
+                                                  snapshot.data.documents[index]
+                                                      .reference);
 
-                                        this.notificacaoDaOperacao(
-                                            await response, false);
-                                      }),
-                                  IconButton(
-                                      icon: Icon(Icons.edit),
-                                      onPressed: () {
-                                        abrirModalEditar(
-                                            context,
-                                            screenSize,
-                                            snapshot.data.documents[index]
-                                                .reference,
-                                            snapshot.data.documents[index]
-                                                .data["descricao"],
-                                            snapshot.data.documents[index]
-                                                .data["fabricante"]);
-                                      }),
-                                ],
-                              ),
-                            ),
+                                              this.notificacaoDaOperacao(
+                                                  await response, false);
+                                            }),
+                                        IconButton(
+                                            icon: Icon(Icons.edit),
+                                            onPressed: () {
+                                              abrirModalEditar(
+                                                  context,
+                                                  screenSize,
+                                                  snapshot.data.documents[index]
+                                                      .reference,
+                                                  snapshot.data.documents[index]
+                                                      .data["descricao"],
+                                                  snapshot.data.documents[index]
+                                                      .data["fabricante"]);
+                                            }),
+                                      ],
+                                    ),
+                                  ),
                           ),
                         ),
                       );

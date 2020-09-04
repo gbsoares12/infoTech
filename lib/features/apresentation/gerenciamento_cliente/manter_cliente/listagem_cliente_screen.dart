@@ -79,6 +79,8 @@ class _ListagemClienteScreenState extends State<ListagemClienteScreen> {
                         ),
                         Expanded(
                             child: ClientesListView(
+                                height: screenSize.height * 0.6,
+                                width: screenSize.width * 0.6,
                                 scrollController:
                                     _listaClientesScrollController,
                                 nomeClienteController: _nomeClienteController,
