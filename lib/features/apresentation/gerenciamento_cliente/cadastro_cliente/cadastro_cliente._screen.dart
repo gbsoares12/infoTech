@@ -1,22 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:infoTech/features/apresentation/gerenciamento_produto/cadastro_produto/widgets/formulario_criacao_produto_view.dart';
-import 'package:infoTech/features/data/repository/produto_repository.dart';
+import 'package:infoTech/features/apresentation/gerenciamento_cliente/cadastro_cliente/widgets/formulario_criacao_cliente_view.dart';
+import 'package:infoTech/features/data/repository/cliente_repository.dart';
 
-class CadastroProduto extends StatefulWidget {
+class CadastroCliente extends StatefulWidget {
   @override
-  _CadastroProdutoState createState() => _CadastroProdutoState();
+  _CadastroClienteState createState() => _CadastroClienteState();
 }
 
-class _CadastroProdutoState extends State<CadastroProduto> {
-  final TextEditingController _descricaoProdutoController =
+class _CadastroClienteState extends State<CadastroCliente> {
+  final TextEditingController _nomeClienteController = TextEditingController();
+  final TextEditingController _cpfClienteController = TextEditingController();
+  final TextEditingController _logradouroClienteController =
       TextEditingController();
-  final TextEditingController _fabricanteProdutoController =
+  final TextEditingController _numeroClienteController =
       TextEditingController();
+  final TextEditingController _bairroClienteController =
+      TextEditingController();
+  final TextEditingController _cidadeClienteController =
+      TextEditingController();
+  final TextEditingController _cepClienteController = TextEditingController();
+  final TextEditingController _estadoClienteController =
+      TextEditingController();
+
   final ScrollController _scrollController = ScrollController();
 
-  final ProdutoRepository pr = ProdutoRepository();
+  final ClienteRepository cr = ClienteRepository();
 
   bool _isLoading = false;
 
@@ -32,7 +42,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
         child: SingleChildScrollView(
           controller: _scrollController,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
                 height: 100,
@@ -41,7 +51,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: screenSize.height * 0.7,
+                    height: screenSize.height * 1.2,
                     width: screenSize.width * 0.5,
                     decoration: BoxDecoration(
                         boxShadow: [
@@ -62,7 +72,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                             children: [
                               Container(
                                 child: Text(
-                                  "Cadastro de produto",
+                                  "Cadastro de Cliente",
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor,
                                       fontSize: 20,
@@ -73,29 +83,37 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(top: 100.0),
-                          child: _isLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : FormularioCriacaoProdutoView(
-                                  descricaoProdutoController:
-                                      _descricaoProdutoController,
-                                  fabricanteProdutoController:
-                                      _fabricanteProdutoController,
-                                ),
-                        ),
+                            padding: const EdgeInsets.only(top: 100.0),
+                            child: _isLoading
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : FormularioCriacaoCliente(
+                                    nomeClienteController:
+                                        _nomeClienteController,
+                                    cpfClienteController: _cpfClienteController,
+                                    logradouroClienteController:
+                                        _logradouroClienteController,
+                                    numeroClienteController:
+                                        _numeroClienteController,
+                                    bairroClienteController:
+                                        _bairroClienteController,
+                                    cidadeClienteController:
+                                        _cidadeClienteController,
+                                    cepClienteController: _cepClienteController,
+                                    estadoClienteController:
+                                        _estadoClienteController)),
                         Container(
                           padding: const EdgeInsets.only(top: 120.0),
                           child: RaisedButton(
                             color: Theme.of(context).primaryColor,
                             onPressed: () async {
-                              await _cadastrarProduto();
+                              await _cadastrarCliente();
                             },
                             child: this._isLoading
                                 ? CupertinoActivityIndicator()
                                 : Text(
-                                    "Cadastrar produto",
+                                    "Cadastar cliente",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -118,22 +136,34 @@ class _CadastroProdutoState extends State<CadastroProduto> {
     ));
   }
 
-  Future<void> _cadastrarProduto() async {
-    if (this._descricaoProdutoController.text.isNotEmpty &&
-        this._fabricanteProdutoController.text.isNotEmpty) {
+  Future<void> _cadastrarCliente() async {
+    if (this._nomeClienteController.text.isNotEmpty &&
+        this._cpfClienteController.text.isNotEmpty &&
+        this._logradouroClienteController.text.isNotEmpty &&
+        this._numeroClienteController.text.isNotEmpty &&
+        this._bairroClienteController.text.isNotEmpty &&
+        this._cidadeClienteController.text.isNotEmpty &&
+        this._cepClienteController.text.isNotEmpty &&
+        this._estadoClienteController.text.isNotEmpty) {
       setState(() {
         _isLoading = true;
       });
-      var response = await pr.cadastrarProduto({
-        "descricao": this._descricaoProdutoController.text,
-        "fabricante": this._fabricanteProdutoController.text,
+      var response = await cr.cadastrarCliente({
+        "nome": this._nomeClienteController.text,
+        "cpf": this._cpfClienteController.text,
+        "logradouro": this._logradouroClienteController.text,
+        "numero": this._numeroClienteController.text,
+        "bairro": this._bairroClienteController.text,
+        "cidade": this._cidadeClienteController.text,
+        "cep": this._cepClienteController.text,
+        "estado": this._estadoClienteController.text,
       });
       setState(() {
         _isLoading = true;
         if (response) {
           this._isLoading = false;
           Fluttertoast.showToast(
-              msg: "Produto cadastrado com sucesso!",
+              msg: "Cliente cadastrado com sucesso!",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 3,
@@ -144,7 +174,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
         } else {
           this._isLoading = false;
           Fluttertoast.showToast(
-              msg: "Erro ao cadastrar o produto",
+              msg: "Erro ao cadastrar o cliente",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 3,
@@ -155,8 +185,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
         }
       });
 
-      this._descricaoProdutoController.clear();
-      this._fabricanteProdutoController.clear();
+      limparCampos();
     } else {
       Fluttertoast.showToast(
           msg: "Preencha os campos corretamente",
@@ -168,5 +197,16 @@ class _CadastroProdutoState extends State<CadastroProduto> {
           textColor: Colors.white,
           fontSize: 16.0);
     }
+  }
+
+  void limparCampos() {
+    this._nomeClienteController.clear();
+    this._cpfClienteController.clear();
+    this._logradouroClienteController.clear();
+    this._numeroClienteController.clear();
+    this._bairroClienteController.clear();
+    this._cidadeClienteController.clear();
+    this._cepClienteController.clear();
+    this._estadoClienteController.clear();
   }
 }
