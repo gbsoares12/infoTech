@@ -16,6 +16,9 @@ class ClientesListView extends StatelessWidget {
   final TextEditingController cidadeClienteController;
   final TextEditingController cepClienteController;
   final TextEditingController estadoClienteController;
+  final bool isCriacaoPedido;
+  final double height;
+  final double width;
 
   ClientesListView({
     Key key,
@@ -28,6 +31,9 @@ class ClientesListView extends StatelessWidget {
     @required this.cidadeClienteController,
     @required this.cepClienteController,
     @required this.estadoClienteController,
+    @required this.height,
+    @required this.width,
+    this.isCriacaoPedido = false,
   }) : super(key: key);
 
   @override
@@ -53,8 +59,8 @@ class ClientesListView extends StatelessWidget {
             );
           } else {
             return Container(
-              height: screenSize.height * 0.6,
-              width: screenSize.height * 0.9,
+              height: height,
+              width: width,
               child: Scrollbar(
                 controller: scrollController,
                 child: ListView.builder(
@@ -71,34 +77,37 @@ class ClientesListView extends StatelessWidget {
                                 snapshot.data.documents[index].data["nome"]),
                             subtitle: Text(
                                 snapshot.data.documents[index].data["cpf"]),
-                            trailing: Container(
-                              width: 100,
-                              height: 50,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () async {
-                                        var response = cr.deletarCliente(
-                                            snapshot.data.documents[index]
-                                                .reference);
+                            trailing: this.isCriacaoPedido
+                                ? null
+                                : Container(
+                                    width: 100,
+                                    height: 50,
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                            icon: Icon(Icons.delete),
+                                            onPressed: () async {
+                                              var response = cr.deletarCliente(
+                                                  snapshot.data.documents[index]
+                                                      .reference);
 
-                                        this.notificacaoDaOperacao(
-                                            await response, false);
-                                      }),
-                                  IconButton(
-                                      icon: Icon(Icons.edit),
-                                      onPressed: () {
-                                        abrirModalEditar(
-                                            context,
-                                            screenSize,
-                                            snapshot.data.documents[index]
-                                                .reference,
-                                            snapshot.data.documents[index]);
-                                      }),
-                                ],
-                              ),
-                            ),
+                                              this.notificacaoDaOperacao(
+                                                  await response, false);
+                                            }),
+                                        IconButton(
+                                            icon: Icon(Icons.edit),
+                                            onPressed: () {
+                                              abrirModalEditar(
+                                                  context,
+                                                  screenSize,
+                                                  snapshot.data.documents[index]
+                                                      .reference,
+                                                  snapshot
+                                                      .data.documents[index]);
+                                            }),
+                                      ],
+                                    ),
+                                  ),
                             onTap: () {
                               if (snapshot.hasData) {
                                 abrirModalVisualizarDados(context, screenSize,

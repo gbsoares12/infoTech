@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:infoTech/features/apresentation/gerenciamento_cliente/manter_cliente/widgets/clientes_list_view.dart';
+import 'package:infoTech/features/apresentation/gerenciamento_pedido/manter_pedido/widgets/pedido_list_view.dart';
 
-class ListagemClienteScreen extends StatefulWidget {
+class ListagemPedidoScreen extends StatefulWidget {
   @override
-  _ListagemClienteScreenState createState() => _ListagemClienteScreenState();
+  _ListagemPedidoScreenState createState() => _ListagemPedidoScreenState();
 }
 
-class _ListagemClienteScreenState extends State<ListagemClienteScreen> {
+class _ListagemPedidoScreenState extends State<ListagemPedidoScreen> {
   final ScrollController _scrollController = ScrollController();
-  final ScrollController _listaClientesScrollController = ScrollController();
-
-  final TextEditingController _nomeClienteController = TextEditingController();
-  final TextEditingController _cpfClienteController = TextEditingController();
-  final TextEditingController _logradouroClienteController =
+  final ScrollController _listaProdutosScrollController = ScrollController();
+  final TextEditingController fabricanteProdutoController =
       TextEditingController();
-  final TextEditingController _numeroClienteController =
+  final TextEditingController descricaoProdutoController =
       TextEditingController();
-  final TextEditingController _bairroClienteController =
-      TextEditingController();
-  final TextEditingController _cidadeClienteController =
-      TextEditingController();
-  final TextEditingController _cepClienteController = TextEditingController();
-  final TextEditingController _estadoClienteController =
-      TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -64,7 +53,7 @@ class _ListagemClienteScreenState extends State<ListagemClienteScreen> {
                             children: [
                               Container(
                                 child: Text(
-                                  "Listagem dos clientes",
+                                  "Listagem dos pedidos",
                                   style: TextStyle(
                                       color: Colors.black54,
                                       fontSize: 20,
@@ -78,24 +67,10 @@ class _ListagemClienteScreenState extends State<ListagemClienteScreen> {
                           height: 80,
                         ),
                         Expanded(
-                            child: ClientesListView(
-                                height: screenSize.height * 0.6,
-                                width: screenSize.width * 0.6,
-                                scrollController:
-                                    _listaClientesScrollController,
-                                nomeClienteController: _nomeClienteController,
-                                cpfClienteController: _cpfClienteController,
-                                logradouroClienteController:
-                                    _logradouroClienteController,
-                                numeroClienteController:
-                                    _numeroClienteController,
-                                bairroClienteController:
-                                    _bairroClienteController,
-                                cidadeClienteController:
-                                    _cidadeClienteController,
-                                cepClienteController: _cepClienteController,
-                                estadoClienteController:
-                                    _estadoClienteController)),
+                          child: PedidosListView(
+                            scrollController: _listaProdutosScrollController,
+                          ),
+                        ),
                         SizedBox(
                           height: 10,
                         ),
