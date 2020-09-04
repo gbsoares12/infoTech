@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="infoTech">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+  <title>infoTech</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+ 
+   <!-- Previously loaded Firebase SDKs -->
+ 
+   <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyApSwvTXxU09NrUZuJUwONBXaLX_ITfNCg",
+      authDomain: "infotech-25621.firebaseapp.com",
+      databaseURL: "https://infotech-25621.firebaseio.com",
+      projectId: "infotech-25621",
+      storageBucket: "infotech-25621.appspot.com",
+      messagingSenderId: "895851012990",
+      appId: "1:895851012990:web:3a3b3ae5f3d2a568dec92f"
+    };
+ 
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+   </script>
+   <!-- Initialize Firebase -->
+   <script src="/__/firebase/init.js"></script>
+ 
+ 
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
