@@ -28,11 +28,11 @@ class _CadastroPedidoState extends State<CadastroPedido> {
       TextEditingController();
   final TextEditingController descontoProdutoTextEditingController =
       TextEditingController();
+  final List<PedidoItem> listaPedidoItens = List<PedidoItem>();
   final PedidoRepository pr = PedidoRepository();
   final ClienteRepository clir = ClienteRepository();
   final ProdutoRepository prodr = ProdutoRepository();
   int indexClienteSelecionado;
-  final List<PedidoItem> listaPedidoItens = List<PedidoItem>();
   Cliente clienteSelecionado;
   Produto produtoSelecionado;
   bool _isLoading = false;
@@ -413,16 +413,18 @@ class _CadastroPedidoState extends State<CadastroPedido> {
   void _cadastrarItemNoPedido() {
     setState(() {
       this.listaPedidoItens.add(PedidoItem(
-          id: null,
-          produto: this.produtoSelecionado,
-          quantidade:
-              int.parse(this.quantidadeProdutoTextEditingController.text),
-          precoUnidade:
-              double.parse(this.precoProdutoTextEditingController.text),
-          desconto:
-              double.parse(this.descontoProdutoTextEditingController.text),
-          cliente: this.clienteSelecionado,
-          documentReference: null));
+            id: null,
+            produto: this.produtoSelecionado,
+            quantidade:
+                int.parse(this.quantidadeProdutoTextEditingController.text),
+            precoUnidade:
+                double.parse(this.precoProdutoTextEditingController.text),
+            desconto:
+                double.parse(this.descontoProdutoTextEditingController.text),
+            cliente: this.clienteSelecionado,
+            descricaoProduto: this.produtoSelecionado.descricao,
+            documentReference: null,
+          ));
       this.quantidadeProdutoTextEditingController.clear();
       this.precoProdutoTextEditingController.clear();
       this.descontoProdutoTextEditingController.clear();

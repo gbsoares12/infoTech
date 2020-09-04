@@ -10,9 +10,11 @@ class PedidoItemModel extends PedidoItem {
       @required cliente,
       @required precoUnidade,
       @required desconto,
+      @required descricaoProduto,
       @required documentReference})
       : super(
             id: id,
+            descricaoProduto: descricaoProduto,
             produto: produto,
             quantidade: quantidade,
             cliente: cliente,
@@ -24,6 +26,7 @@ class PedidoItemModel extends PedidoItem {
     return PedidoItemModel(
       id: snapshot.documentID,
       produto: snapshot.data["produto"],
+      descricaoProduto: snapshot.data["descricaoProduto"],
       quantidade: snapshot.data["quantidade"],
       cliente: snapshot.data["cliente"],
       precoUnidade: snapshot.data["precoUnidade"],

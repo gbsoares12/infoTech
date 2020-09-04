@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:infoTech/features/domain/entities/cliente.dart';
-import 'package:infoTech/features/domain/entities/produto.dart';
 import 'package:flutter/foundation.dart';
 
 class PedidoItem {
   final String id;
-  final Produto produto;
-  final Cliente cliente;
+  final dynamic produto;
+  final dynamic cliente;
   final int quantidade;
   final double precoUnidade;
   final double desconto;
+  final String descricaoProduto;
   final DocumentReference documentReference;
 
   PedidoItem({
@@ -19,6 +18,7 @@ class PedidoItem {
     @required this.quantidade,
     @required this.precoUnidade,
     @required this.desconto,
+    @required this.descricaoProduto,
     @required this.documentReference,
   });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_cliente/cadastro_cliente/cadastro_cliente._screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_cliente/manter_cliente/listagem_cliente_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_pedido/cadastro_pedido/cadastro_pedido_screen.dart';
+import 'package:infoTech/features/apresentation/gerenciamento_pedido/manter_pedido/listagem_pedido_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_produto/cadastro_produto/cadastro_produto_screen.dart';
 import 'package:infoTech/features/apresentation/gerenciamento_produto/manter_produto/listagem_produto_screen.dart';
 
@@ -116,9 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CadastroCliente(),
               ListagemClienteScreen(),
               CadastroPedido(),
-              Container(
-                color: Colors.red,
-              ),
+              ListagemPedidoScreen(),
             ],
           )),
     );
