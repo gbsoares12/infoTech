@@ -13,6 +13,8 @@ class _ListagemProdutoScreenState extends State<ListagemProdutoScreen> {
       TextEditingController();
   final TextEditingController descricaoProdutoController =
       TextEditingController();
+  final TextEditingController precoProdutoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -72,6 +74,7 @@ class _ListagemProdutoScreenState extends State<ListagemProdutoScreen> {
                                 descricaoProdutoController,
                             fabricanteProdutoController:
                                 fabricanteProdutoController,
+                            precoProdutoController: precoProdutoController,
                             scrollController: _listaProdutosScrollController,
                           ),
                         ),

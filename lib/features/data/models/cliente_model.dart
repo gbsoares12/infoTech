@@ -13,6 +13,7 @@ class ClienteModel extends Cliente {
       @required cidade,
       @required cep,
       @required estado,
+      @required desconto,
       @required documentReference})
       : super(
           id: id,
@@ -24,6 +25,7 @@ class ClienteModel extends Cliente {
           cidade: cidade,
           cep: cep,
           estado: estado,
+          desconto: desconto,
           documentReference: documentReference,
         );
 
@@ -38,6 +40,7 @@ class ClienteModel extends Cliente {
       cidade: snapshot.data['cidade'],
       cep: snapshot.data['cep'],
       estado: snapshot.data['estado'],
+      desconto: snapshot.data['desconto'],
       documentReference: snapshot.reference,
     );
   }

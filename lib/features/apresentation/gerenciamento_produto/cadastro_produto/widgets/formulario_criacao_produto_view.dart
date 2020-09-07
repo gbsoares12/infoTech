@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 class FormularioCriacaoProdutoView extends StatelessWidget {
   final TextEditingController descricaoProdutoController;
-
   final TextEditingController fabricanteProdutoController;
+  final TextEditingController precoProdutoController;
 
-  const FormularioCriacaoProdutoView(
-      {Key key,
-      @required this.descricaoProdutoController,
-      @required this.fabricanteProdutoController})
-      : super(key: key);
+  const FormularioCriacaoProdutoView({
+    Key key,
+    @required this.descricaoProdutoController,
+    @required this.fabricanteProdutoController,
+    @required this.precoProdutoController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,18 @@ class FormularioCriacaoProdutoView extends StatelessWidget {
               controller: fabricanteProdutoController,
               decoration: InputDecoration(
                 labelText: "Fabricante do produto",
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 80),
+            child: TextFormField(
+              controller: precoProdutoController,
+              decoration: InputDecoration(
+                labelText: "Preco do produto",
               ),
             ),
           ),

@@ -10,12 +10,15 @@ class ProdutosListView extends StatelessWidget {
   final ScrollController scrollController;
   final TextEditingController fabricanteProdutoController;
   final TextEditingController descricaoProdutoController;
+  final TextEditingController precoProdutoController;
+
   final bool isCriacaoPedido;
   ProdutosListView(
       {Key key,
       @required this.scrollController,
       @required this.descricaoProdutoController,
       @required this.fabricanteProdutoController,
+      @required this.precoProdutoController,
       this.isCriacaoPedido = false})
       : super(key: key);
 
@@ -56,10 +59,16 @@ class ProdutosListView extends StatelessWidget {
                         width: 150,
                         child: Card(
                           child: ListTile(
+                            isThreeLine: true,
                             title: Text(snapshot
                                 .data.documents[index].data["descricao"]),
                             subtitle: Text(snapshot
-                                .data.documents[index].data["fabricante"]),
+                                    .data.documents[index].data["fabricante"] +
+                                "\nR\$ " +
+                                snapshot.data.documents[index].data["preco"]),
+
+                            //"Preco"),
+                            //snapshot.data.documents[index].data["preco"]),
                             trailing: this.isCriacaoPedido
                                 ? Container()
                                 : Container(
@@ -88,7 +97,9 @@ class ProdutosListView extends StatelessWidget {
                                                   snapshot.data.documents[index]
                                                       .data["descricao"],
                                                   snapshot.data.documents[index]
-                                                      .data["fabricante"]);
+                                                      .data["fabricante"],
+                                                  snapshot.data.documents[index]
+                                                      .data["preco"]);
                                             }),
                                       ],
                                     ),
@@ -133,9 +144,11 @@ class ProdutosListView extends StatelessWidget {
     DocumentReference produtoDocumentReference,
     String descricao,
     String fabricante,
+    double preco,
   ) {
     this.descricaoProdutoController.text = descricao;
     this.fabricanteProdutoController.text = fabricante;
+    this.precoProdutoController.text = preco.toString();
     AwesomeDialog(
       context: context,
       animType: AnimType.TOPSLIDE,
@@ -151,6 +164,7 @@ class ProdutosListView extends StatelessWidget {
             FormularioCriacaoProdutoView(
               descricaoProdutoController: descricaoProdutoController,
               fabricanteProdutoController: fabricanteProdutoController,
+              precoProdutoController: precoProdutoController,
             ),
           ],
         ),
@@ -159,6 +173,7 @@ class ProdutosListView extends StatelessWidget {
         var resposta = await pr.editarProduto({
           "descricao": this.descricaoProdutoController.text,
           "fabricante": this.fabricanteProdutoController.text,
+          "preco": this.precoProdutoController.text,
         }, produtoDocumentReference);
         notificacaoDaOperacao(resposta, true);
       },

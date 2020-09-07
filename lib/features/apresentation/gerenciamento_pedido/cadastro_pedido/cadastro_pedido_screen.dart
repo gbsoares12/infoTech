@@ -35,6 +35,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
   int indexClienteSelecionado;
   Cliente clienteSelecionado;
   Produto produtoSelecionado;
+  String desconto = "";
   bool _isLoading = false;
 
   @override
@@ -286,33 +287,45 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                             cidade: null,
                             cep: null,
                             estado: null,
+                            desconto: null,
                             documentReference: null));
                         QuerySnapshot query = snapshot.data;
                         for (var clienteSnapshot in query.documents) {
                           listaClientes
                               .add(ClienteModel.fromDocument(clienteSnapshot));
                         }
-                        return Container(
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          child: DropdownButtonFormField(
-                              value: this.clienteSelecionado == null
-                                  ? listaClientes.first
-                                  : listaClientes[indexClienteSelecionado],
-                              items: listaClientes
-                                  .map<DropdownMenuItem<Cliente>>(
-                                      (Cliente value) {
-                                return DropdownMenuItem<Cliente>(
-                                  value: value,
-                                  child: Text(value.nome),
-                                );
-                              }).toList(),
-                              onChanged: this.clienteSelecionado == null
-                                  ? (cliente) {
-                                      indexClienteSelecionado =
-                                          listaClientes.indexOf(cliente);
-                                      this.clienteSelecionado = cliente;
-                                    }
-                                  : null),
+
+                        return Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: DropdownButtonFormField(
+                                value: this.clienteSelecionado == null
+                                    ? listaClientes.first
+                                    : listaClientes[indexClienteSelecionado],
+                                items: listaClientes
+                                    .map<DropdownMenuItem<Cliente>>(
+                                        (Cliente value) {
+                                  return DropdownMenuItem<Cliente>(
+                                    value: value,
+                                    child: Text(value.nome),
+                                  );
+                                }).toList(),
+                                onChanged: this.clienteSelecionado == null
+                                    ? (cliente) {
+                                        indexClienteSelecionado =
+                                            listaClientes.indexOf(cliente);
+                                        this.clienteSelecionado = cliente;
+                                        setText(clienteSelecionado.desconto);
+                                      }
+                                    : null,
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(desconto),
+                            ),
+                          ],
                         );
                       } else {
                         return Column(
@@ -363,6 +376,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                             id: null,
                             descricao: "Selecione um produto",
                             fabricante: null,
+                            preco: null,
                             documentReference: null));
                         QuerySnapshot query = snapshot.data;
                         for (var produtoSnapshot in query.documents) {
@@ -384,6 +398,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                               }).toList(),
                               onChanged: (produto) {
                                 this.produtoSelecionado = produto;
+                                setTextProduto(produtoSelecionado.preco);
                               }),
                         );
                       } else {
@@ -474,6 +489,18 @@ class _CadastroPedidoState extends State<CadastroPedido> {
       this.quantidadeProdutoTextEditingController.clear();
       this.precoProdutoTextEditingController.clear();
       this.descontoProdutoTextEditingController.clear();
+    });
+  }
+
+  void setText(String text) {
+    setState(() {
+      desconto = "Desconto do cliente: " + text + " %";
+    });
+  }
+
+  void setTextProduto(String text) {
+    setState(() {
+      this.precoProdutoTextEditingController.text = text;
     });
   }
 }

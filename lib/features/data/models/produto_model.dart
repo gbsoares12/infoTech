@@ -7,11 +7,13 @@ class ProdutoModel extends Produto {
       {@required id,
       @required descricao,
       @required fabricante,
+      @required preco,
       @required documentReference})
       : super(
             id: id,
             descricao: descricao,
             fabricante: fabricante,
+            preco: preco,
             documentReference: documentReference);
 
   factory ProdutoModel.fromDocument(DocumentSnapshot snapshot) {
@@ -19,6 +21,7 @@ class ProdutoModel extends Produto {
       id: snapshot.documentID,
       descricao: snapshot.data["descricao"],
       fabricante: snapshot.data["fabricante"],
+      preco: snapshot.data["preco"],
       documentReference: snapshot.reference,
     );
   }

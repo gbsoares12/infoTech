@@ -23,6 +23,8 @@ class _ListagemClienteScreenState extends State<ListagemClienteScreen> {
   final TextEditingController _cepClienteController = TextEditingController();
   final TextEditingController _estadoClienteController =
       TextEditingController();
+  final TextEditingController _descontoClienteController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -79,23 +81,20 @@ class _ListagemClienteScreenState extends State<ListagemClienteScreen> {
                         ),
                         Expanded(
                             child: ClientesListView(
-                                height: screenSize.height * 0.6,
-                                width: screenSize.width * 0.6,
-                                scrollController:
-                                    _listaClientesScrollController,
-                                nomeClienteController: _nomeClienteController,
-                                cpfClienteController: _cpfClienteController,
-                                logradouroClienteController:
-                                    _logradouroClienteController,
-                                numeroClienteController:
-                                    _numeroClienteController,
-                                bairroClienteController:
-                                    _bairroClienteController,
-                                cidadeClienteController:
-                                    _cidadeClienteController,
-                                cepClienteController: _cepClienteController,
-                                estadoClienteController:
-                                    _estadoClienteController)),
+                          height: screenSize.height * 0.6,
+                          width: screenSize.width * 0.6,
+                          scrollController: _listaClientesScrollController,
+                          nomeClienteController: _nomeClienteController,
+                          cpfClienteController: _cpfClienteController,
+                          logradouroClienteController:
+                              _logradouroClienteController,
+                          numeroClienteController: _numeroClienteController,
+                          bairroClienteController: _bairroClienteController,
+                          cidadeClienteController: _cidadeClienteController,
+                          cepClienteController: _cepClienteController,
+                          estadoClienteController: _estadoClienteController,
+                          descontoClienteController: _descontoClienteController,
+                        )),
                         SizedBox(
                           height: 10,
                         ),
