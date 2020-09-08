@@ -246,7 +246,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                   subtitle: Row(
                     children: [
                       Text(
-                          "Quantidade: ${this.listaPedidoItens[index].quantidade} - Cliente: ${this.listaPedidoItens[index].cliente.nome} - Preço unitário: ${this.listaPedidoItens[index].precoUnidade} - Desconto: ${this.listaPedidoItens[index].desconto}"),
+                          "Quantidade: ${this.listaPedidoItens[index].quantidade.toString()} - Cliente: ${this.listaPedidoItens[index].cliente.nome} - Preço unitário: ${this.listaPedidoItens[index].precoUnidade.toString()} - Desconto: ${this.listaPedidoItens[index].desconto.toString()}"),
                     ],
                   ),
                 ),
@@ -501,8 +501,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
   }
 
   void setTextProduto(String text) {
-    setState(() {
-      this.precoProdutoTextEditingController.text = text;
-    });
+    this.precoProdutoTextEditingController.text =
+        this.produtoSelecionado.preco.toString();
   }
 }

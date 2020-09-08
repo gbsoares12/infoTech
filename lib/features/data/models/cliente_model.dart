@@ -40,7 +40,9 @@ class ClienteModel extends Cliente {
       cidade: snapshot.data['cidade'],
       cep: snapshot.data['cep'],
       estado: snapshot.data['estado'],
-      desconto: snapshot.data['desconto'],
+      desconto: snapshot.data['desconto'] != null
+          ? snapshot.data['desconto'] + 0.00
+          : 0.00,
       documentReference: snapshot.reference,
     );
   }
