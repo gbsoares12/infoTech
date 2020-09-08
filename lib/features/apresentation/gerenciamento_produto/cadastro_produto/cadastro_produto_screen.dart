@@ -42,7 +42,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: screenSize.height * 0.7,
+                    height: screenSize.height * 1,
                     width: screenSize.width * 0.5,
                     decoration: BoxDecoration(
                         boxShadow: [
@@ -131,7 +131,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
       var response = await pr.cadastrarProduto({
         "descricao": this._descricaoProdutoController.text,
         "fabricante": this._fabricanteProdutoController.text,
-        "preco": this._precoProdutoController.text,
+        "preco": double.parse(this._precoProdutoController.text),
       });
       setState(() {
         _isLoading = true;

@@ -4,7 +4,7 @@ class Produto {
   final String id;
   final String descricao;
   final String fabricante;
-  final String preco;
+  final double preco;
   final dynamic documentReference;
 
   Produto(

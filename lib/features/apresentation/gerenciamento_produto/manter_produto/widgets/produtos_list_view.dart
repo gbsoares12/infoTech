@@ -65,7 +65,8 @@ class ProdutosListView extends StatelessWidget {
                             subtitle: Text(snapshot
                                     .data.documents[index].data["fabricante"] +
                                 "\nR\$ " +
-                                snapshot.data.documents[index].data["preco"]),
+                                snapshot.data.documents[index].data["preco"]
+                                    .toString()),
 
                             //"Preco"),
                             //snapshot.data.documents[index].data["preco"]),
@@ -173,7 +174,7 @@ class ProdutosListView extends StatelessWidget {
         var resposta = await pr.editarProduto({
           "descricao": this.descricaoProdutoController.text,
           "fabricante": this.fabricanteProdutoController.text,
-          "preco": this.precoProdutoController.text,
+          "preco": double.parse(this.precoProdutoController.text),
         }, produtoDocumentReference);
         notificacaoDaOperacao(resposta, true);
       },

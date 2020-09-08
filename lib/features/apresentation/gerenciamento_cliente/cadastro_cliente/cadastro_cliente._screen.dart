@@ -162,7 +162,7 @@ class _CadastroClienteState extends State<CadastroCliente> {
         "cidade": this._cidadeClienteController.text,
         "cep": this._cepClienteController.text,
         "estado": this._estadoClienteController.text,
-        "desconto": this._descontoClienteController,
+        "desconto": double.parse(this._descontoClienteController.text),
       });
       setState(() {
         _isLoading = true;

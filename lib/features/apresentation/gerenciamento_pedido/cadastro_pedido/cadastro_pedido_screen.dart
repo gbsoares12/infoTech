@@ -316,7 +316,8 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                                         indexClienteSelecionado =
                                             listaClientes.indexOf(cliente);
                                         this.clienteSelecionado = cliente;
-                                        setText(clienteSelecionado.desconto);
+                                        setText(clienteSelecionado.desconto
+                                            .toString());
                                       }
                                     : null,
                               ),
@@ -398,7 +399,8 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                               }).toList(),
                               onChanged: (produto) {
                                 this.produtoSelecionado = produto;
-                                setTextProduto(produtoSelecionado.preco);
+                                setTextProduto(
+                                    produtoSelecionado.preco.toString());
                               }),
                         );
                       } else {
