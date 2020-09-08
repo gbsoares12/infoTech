@@ -163,7 +163,10 @@ class ClientesListView extends StatelessWidget {
     this.cidadeClienteController.text = clienteSnapshot.data['cidade'];
     this.cepClienteController.text = clienteSnapshot.data['cep'];
     this.estadoClienteController.text = clienteSnapshot.data['estado'];
-    this.descontoClienteController.text = clienteSnapshot.data['desconto'];
+    this.descontoClienteController.text =
+        clienteSnapshot.data['desconto'] != null
+            ? clienteSnapshot.data['desconto'].toString()
+            : "0.00";
 
     AwesomeDialog(
       context: context,
@@ -222,9 +225,10 @@ class ClientesListView extends StatelessWidget {
     this.cidadeClienteController.text = clienteSnapshot.data['cidade'];
     this.cepClienteController.text = clienteSnapshot.data['cep'];
     this.estadoClienteController.text = clienteSnapshot.data['estado'];
-    this.descontoClienteController.text = clienteSnapshot.data['desconto']
-        ? clienteSnapshot.data['desconto'].toString()
-        : "0";
+    this.descontoClienteController.text =
+        clienteSnapshot.data['desconto'] != null
+            ? clienteSnapshot.data['desconto'].toString()
+            : "0";
 
     AwesomeDialog(
         context: context,
