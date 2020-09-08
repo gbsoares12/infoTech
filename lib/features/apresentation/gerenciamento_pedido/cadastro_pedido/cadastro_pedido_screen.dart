@@ -35,6 +35,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
   int indexClienteSelecionado;
   Cliente clienteSelecionado;
   Produto produtoSelecionado;
+  String desconto = "";
   bool _isLoading = false;
 
   @override
@@ -245,7 +246,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                   subtitle: Row(
                     children: [
                       Text(
-                          "Quantidade: ${this.listaPedidoItens[index].quantidade} - Cliente: ${this.listaPedidoItens[index].cliente.nome} - Preço unitário: ${this.listaPedidoItens[index].precoUnidade} - Desconto: ${this.listaPedidoItens[index].desconto}"),
+                          "Quantidade: ${this.listaPedidoItens[index].quantidade.toString()} - Cliente: ${this.listaPedidoItens[index].cliente.nome} - Preço unitário: ${this.listaPedidoItens[index].precoUnidade.toString()} - Desconto: ${this.listaPedidoItens[index].desconto.toString()}"),
                     ],
                   ),
                 ),
@@ -286,33 +287,46 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                             cidade: null,
                             cep: null,
                             estado: null,
+                            desconto: null,
                             documentReference: null));
                         QuerySnapshot query = snapshot.data;
                         for (var clienteSnapshot in query.documents) {
                           listaClientes
                               .add(ClienteModel.fromDocument(clienteSnapshot));
                         }
-                        return Container(
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          child: DropdownButtonFormField(
-                              value: this.clienteSelecionado == null
-                                  ? listaClientes.first
-                                  : listaClientes[indexClienteSelecionado],
-                              items: listaClientes
-                                  .map<DropdownMenuItem<Cliente>>(
-                                      (Cliente value) {
-                                return DropdownMenuItem<Cliente>(
-                                  value: value,
-                                  child: Text(value.nome),
-                                );
-                              }).toList(),
-                              onChanged: this.clienteSelecionado == null
-                                  ? (cliente) {
-                                      indexClienteSelecionado =
-                                          listaClientes.indexOf(cliente);
-                                      this.clienteSelecionado = cliente;
-                                    }
-                                  : null),
+
+                        return Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: DropdownButtonFormField(
+                                value: this.clienteSelecionado == null
+                                    ? listaClientes.first
+                                    : listaClientes[indexClienteSelecionado],
+                                items: listaClientes
+                                    .map<DropdownMenuItem<Cliente>>(
+                                        (Cliente value) {
+                                  return DropdownMenuItem<Cliente>(
+                                    value: value,
+                                    child: Text(value.nome),
+                                  );
+                                }).toList(),
+                                onChanged: this.clienteSelecionado == null
+                                    ? (cliente) {
+                                        indexClienteSelecionado =
+                                            listaClientes.indexOf(cliente);
+                                        this.clienteSelecionado = cliente;
+                                        setText(clienteSelecionado.desconto
+                                            .toString());
+                                      }
+                                    : null,
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(desconto),
+                            ),
+                          ],
                         );
                       } else {
                         return Column(
@@ -363,6 +377,7 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                             id: null,
                             descricao: "Selecione um produto",
                             fabricante: null,
+                            preco: null,
                             documentReference: null));
                         QuerySnapshot query = snapshot.data;
                         for (var produtoSnapshot in query.documents) {
@@ -384,6 +399,8 @@ class _CadastroPedidoState extends State<CadastroPedido> {
                               }).toList(),
                               onChanged: (produto) {
                                 this.produtoSelecionado = produto;
+                                setTextProduto(
+                                    produtoSelecionado.preco.toString());
                               }),
                         );
                       } else {
@@ -475,5 +492,16 @@ class _CadastroPedidoState extends State<CadastroPedido> {
       this.precoProdutoTextEditingController.clear();
       this.descontoProdutoTextEditingController.clear();
     });
+  }
+
+  void setText(String text) {
+    setState(() {
+      desconto = "Desconto do cliente: " + text + " %";
+    });
+  }
+
+  void setTextProduto(String text) {
+    this.precoProdutoTextEditingController.text =
+        this.produtoSelecionado.preco.toString();
   }
 }

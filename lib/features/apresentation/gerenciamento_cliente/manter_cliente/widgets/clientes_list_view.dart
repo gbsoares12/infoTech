@@ -16,6 +16,7 @@ class ClientesListView extends StatelessWidget {
   final TextEditingController cidadeClienteController;
   final TextEditingController cepClienteController;
   final TextEditingController estadoClienteController;
+  final TextEditingController descontoClienteController;
   final bool isCriacaoPedido;
   final double height;
   final double width;
@@ -31,6 +32,7 @@ class ClientesListView extends StatelessWidget {
     @required this.cidadeClienteController,
     @required this.cepClienteController,
     @required this.estadoClienteController,
+    @required this.descontoClienteController,
     @required this.height,
     @required this.width,
     this.isCriacaoPedido = false,
@@ -161,6 +163,10 @@ class ClientesListView extends StatelessWidget {
     this.cidadeClienteController.text = clienteSnapshot.data['cidade'];
     this.cepClienteController.text = clienteSnapshot.data['cep'];
     this.estadoClienteController.text = clienteSnapshot.data['estado'];
+    this.descontoClienteController.text =
+        clienteSnapshot.data['desconto'] != null
+            ? clienteSnapshot.data['desconto'].toString()
+            : "0.00";
 
     AwesomeDialog(
       context: context,
@@ -175,14 +181,16 @@ class ClientesListView extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             FormularioCriacaoCliente(
-                nomeClienteController: nomeClienteController,
-                cpfClienteController: cpfClienteController,
-                logradouroClienteController: logradouroClienteController,
-                numeroClienteController: numeroClienteController,
-                bairroClienteController: bairroClienteController,
-                cidadeClienteController: cidadeClienteController,
-                cepClienteController: cepClienteController,
-                estadoClienteController: estadoClienteController)
+              nomeClienteController: nomeClienteController,
+              cpfClienteController: cpfClienteController,
+              logradouroClienteController: logradouroClienteController,
+              numeroClienteController: numeroClienteController,
+              bairroClienteController: bairroClienteController,
+              cidadeClienteController: cidadeClienteController,
+              cepClienteController: cepClienteController,
+              estadoClienteController: estadoClienteController,
+              descontoClienteController: descontoClienteController,
+            )
           ],
         ),
       ),
@@ -196,6 +204,7 @@ class ClientesListView extends StatelessWidget {
           "cidade": this.cidadeClienteController.text,
           "cep": this.cepClienteController.text,
           "estado": this.estadoClienteController.text,
+          "desconto": double.parse(this.descontoClienteController.text),
         }, clienteSnapshot.reference);
 
         notificacaoDaOperacao(resposta, true);
@@ -216,6 +225,10 @@ class ClientesListView extends StatelessWidget {
     this.cidadeClienteController.text = clienteSnapshot.data['cidade'];
     this.cepClienteController.text = clienteSnapshot.data['cep'];
     this.estadoClienteController.text = clienteSnapshot.data['estado'];
+    this.descontoClienteController.text =
+        clienteSnapshot.data['desconto'] != null
+            ? clienteSnapshot.data['desconto'].toString()
+            : "0";
 
     AwesomeDialog(
         context: context,
@@ -230,15 +243,17 @@ class ClientesListView extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               FormularioCriacaoCliente(
-                  readOnly: true,
-                  nomeClienteController: nomeClienteController,
-                  cpfClienteController: cpfClienteController,
-                  logradouroClienteController: logradouroClienteController,
-                  numeroClienteController: numeroClienteController,
-                  bairroClienteController: bairroClienteController,
-                  cidadeClienteController: cidadeClienteController,
-                  cepClienteController: cepClienteController,
-                  estadoClienteController: estadoClienteController)
+                readOnly: true,
+                nomeClienteController: nomeClienteController,
+                cpfClienteController: cpfClienteController,
+                logradouroClienteController: logradouroClienteController,
+                numeroClienteController: numeroClienteController,
+                bairroClienteController: bairroClienteController,
+                cidadeClienteController: cidadeClienteController,
+                cepClienteController: cepClienteController,
+                estadoClienteController: estadoClienteController,
+                descontoClienteController: descontoClienteController,
+              )
             ],
           ),
         ),

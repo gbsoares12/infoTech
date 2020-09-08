@@ -393,6 +393,7 @@ class _PedidosListViewState extends State<PedidosListView> {
                             id: null,
                             descricao: "Selecione um produto",
                             fabricante: null,
+                            preco: null,
                             documentReference: null));
                         QuerySnapshot query = snapshot.data;
                         for (var produtoSnapshot in query.documents) {

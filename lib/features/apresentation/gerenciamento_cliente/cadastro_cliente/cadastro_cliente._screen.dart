@@ -23,6 +23,8 @@ class _CadastroClienteState extends State<CadastroCliente> {
   final TextEditingController _cepClienteController = TextEditingController();
   final TextEditingController _estadoClienteController =
       TextEditingController();
+  final TextEditingController _descontoClienteController =
+      TextEditingController();
 
   final ScrollController _scrollController = ScrollController();
 
@@ -102,7 +104,9 @@ class _CadastroClienteState extends State<CadastroCliente> {
                                         _cidadeClienteController,
                                     cepClienteController: _cepClienteController,
                                     estadoClienteController:
-                                        _estadoClienteController)),
+                                        _estadoClienteController,
+                                    descontoClienteController:
+                                        _descontoClienteController)),
                         Container(
                           padding: const EdgeInsets.only(top: 120.0),
                           child: RaisedButton(
@@ -144,7 +148,8 @@ class _CadastroClienteState extends State<CadastroCliente> {
         this._bairroClienteController.text.isNotEmpty &&
         this._cidadeClienteController.text.isNotEmpty &&
         this._cepClienteController.text.isNotEmpty &&
-        this._estadoClienteController.text.isNotEmpty) {
+        this._estadoClienteController.text.isNotEmpty &&
+        this._descontoClienteController.text.isNotEmpty) {
       setState(() {
         _isLoading = true;
       });
@@ -157,6 +162,7 @@ class _CadastroClienteState extends State<CadastroCliente> {
         "cidade": this._cidadeClienteController.text,
         "cep": this._cepClienteController.text,
         "estado": this._estadoClienteController.text,
+        "desconto": double.parse(this._descontoClienteController.text),
       });
       setState(() {
         _isLoading = true;
@@ -208,5 +214,6 @@ class _CadastroClienteState extends State<CadastroCliente> {
     this._cidadeClienteController.clear();
     this._cepClienteController.clear();
     this._estadoClienteController.clear();
+    this._descontoClienteController.clear();
   }
 }

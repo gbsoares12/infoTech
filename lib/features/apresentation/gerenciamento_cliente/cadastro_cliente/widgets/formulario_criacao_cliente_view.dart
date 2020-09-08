@@ -9,6 +9,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
   final TextEditingController cidadeClienteController;
   final TextEditingController cepClienteController;
   final TextEditingController estadoClienteController;
+  final TextEditingController descontoClienteController;
   final bool readOnly;
 
   const FormularioCriacaoCliente({
@@ -21,6 +22,7 @@ class FormularioCriacaoCliente extends StatelessWidget {
     @required this.cidadeClienteController,
     @required this.cepClienteController,
     @required this.estadoClienteController,
+    @required this.descontoClienteController,
     this.readOnly = false,
   }) : super(key: key);
 
@@ -143,6 +145,24 @@ class FormularioCriacaoCliente extends StatelessWidget {
                     controller: estadoClienteController,
                     decoration: InputDecoration(
                       labelText: "Estado",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 80, vertical: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: screenSize.width * 0.15,
+                  child: TextFormField(
+                    readOnly: readOnly,
+                    controller: descontoClienteController,
+                    decoration: InputDecoration(
+                      labelText: "Desconto padrão (Somente números)",
                     ),
                   ),
                 ),

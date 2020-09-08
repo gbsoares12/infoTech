@@ -14,6 +14,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
       TextEditingController();
   final TextEditingController _fabricanteProdutoController =
       TextEditingController();
+  final TextEditingController _precoProdutoController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   final ProdutoRepository pr = ProdutoRepository();
@@ -41,7 +42,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: screenSize.height * 0.7,
+                    height: screenSize.height * 1,
                     width: screenSize.width * 0.5,
                     decoration: BoxDecoration(
                         boxShadow: [
@@ -83,6 +84,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                                       _descricaoProdutoController,
                                   fabricanteProdutoController:
                                       _fabricanteProdutoController,
+                                  precoProdutoController:
+                                      _precoProdutoController,
                                 ),
                         ),
                         Container(
@@ -120,13 +123,15 @@ class _CadastroProdutoState extends State<CadastroProduto> {
 
   Future<void> _cadastrarProduto() async {
     if (this._descricaoProdutoController.text.isNotEmpty &&
-        this._fabricanteProdutoController.text.isNotEmpty) {
+        this._fabricanteProdutoController.text.isNotEmpty &&
+        this._precoProdutoController.text.isNotEmpty) {
       setState(() {
         _isLoading = true;
       });
       var response = await pr.cadastrarProduto({
         "descricao": this._descricaoProdutoController.text,
         "fabricante": this._fabricanteProdutoController.text,
+        "preco": double.parse(this._precoProdutoController.text),
       });
       setState(() {
         _isLoading = true;
@@ -157,6 +162,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
 
       this._descricaoProdutoController.clear();
       this._fabricanteProdutoController.clear();
+      this._precoProdutoController.clear();
     } else {
       Fluttertoast.showToast(
           msg: "Preencha os campos corretamente",

@@ -10,6 +10,7 @@ class Cliente {
   final String cidade;
   final String cep;
   final String estado;
+  final double desconto;
   final dynamic documentReference;
 
   Cliente(
@@ -22,5 +23,6 @@ class Cliente {
       @required this.cidade,
       @required this.cep,
       @required this.estado,
+      @required this.desconto,
       @required this.documentReference});
 }
